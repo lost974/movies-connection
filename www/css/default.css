@@ -81,10 +81,10 @@ nav ul li a:hover, nav ul li a:focus, nav ul li a:active
 #corps
 {
 	width: 1000px;
-	height: 82%;
-	height: -moz-calc(100% - 173px);
-	height: -webkit-calc(100% - 173px);
-	height: calc(100% - 173px);
+	min-height: 82%;
+	min-height: -moz-calc(100% - 173px);
+	min-height: -webkit-calc(100% - 173px);
+	min-height: calc(100% - 173px);
 	padding-top: 10px;
 	padding-right: 12px;
 	padding-left: 12px;

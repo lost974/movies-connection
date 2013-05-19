@@ -1,5 +1,5 @@
 <h2>Ajouter un film :</h2>
-<?php echo Form::open(NULL, array('enctype' => 'multipart/from-data')); ?>
+<?php echo Form::open(NULL, array('enctype' => 'multipart/form-data')); ?>
 <?php if ($errors): ?>
 	<p class="message">Some errors were encountered, please check the details you entered.</p>
 	<ul class="errors">

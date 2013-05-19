@@ -51,7 +51,7 @@ class Controller_Movie extends Controller_Template {
 
 								// Nom du fichier
 								$ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
-								$name = 'test.'.$ext;//$m->id.'.'.$ext;
+								$name = $m->id.'.'.$ext;
 
 								Image::factory($filename)
 									->resize(203, 300, Image::WIDTH)
@@ -61,11 +61,11 @@ class Controller_Movie extends Controller_Template {
 								// Suppression de l'image temporaire
 								unlink($filename);
 
-								$movie->update_poster($name);
+								$m->update_poster($name, $m);
 							}
 						}
 		        }
-				//redirect
+				HTTP::redirect('movies/view/'.$m->id);
 			}
 
 			$errors = $validation->errors('user');
@@ -78,5 +78,13 @@ class Controller_Movie extends Controller_Template {
 		$this->template->content = View::factory('movies/add')
 			->set('movie',$movie)
 			->set('errors', $errors);
+	}
+
+	public function action_delete()
+	{
+		$id = $this->request->param('id');
+		$movie = Model_Movie::get_movie($id);
+		$movie->delete();
+		HTTP::redirect('movie/index');
 	}
 }

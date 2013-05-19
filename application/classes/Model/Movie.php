@@ -22,10 +22,10 @@ class Model_Movie extends ORM {
 		return $movie;
 	}
 
-	public static function update_poster($name)
+	public static function update_poster($name, $movie)
 	{
-		$this->poster = $name;
-		$this->save();
+		$movie->poster = $name;
+		$movie->save();
 	}
 
 	public function display_poster()
