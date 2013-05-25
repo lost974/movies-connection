@@ -19,7 +19,7 @@ class Controller_Movie extends Controller_Template {
 
 	public function action_add()
 	{
-		$movie = ORM::factory('movie');
+		$movie = ORM::factory('Movie');
 
 		if($_POST)
 		{
