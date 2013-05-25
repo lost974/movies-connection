@@ -14,7 +14,7 @@ class Model_Movie extends ORM {
 		return ORM::factory('movie', $id);
 	}
 
-	public static function add_movie($post)
+	public function add_movie($post)
 	{
 		$this->title 		= 	$post['title'];
 		$this->release 		= 	$post['release'];
@@ -23,7 +23,7 @@ class Model_Movie extends ORM {
 		$this->save();
 	}
 
-	public static function update_poster($name, $movie)
+	public function update_poster($name)
 	{
 		$this->poster = $name;
 		$this->save();

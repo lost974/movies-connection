@@ -16,4 +16,4 @@
 <?php 
 echo HTML::anchor('/movie/hide/'.$movie->id,'hide');
 echo " - ";
-echo HTML::anchor('/movie/delete/'.$movie->id,'hide');?>
+echo HTML::anchor('/movie/delete/'.$movie->id,'delete');?>

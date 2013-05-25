@@ -49,7 +49,7 @@ class Controller_Movie extends Controller_Template {
 
 								// Nom du fichier
 								$ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
-								$name = $m->id.'.'.$ext;
+								$name = $movie->id.'.'.$ext;
 
 								Image::factory($filename)
 									->resize(203, 300, Image::WIDTH)
@@ -59,11 +59,11 @@ class Controller_Movie extends Controller_Template {
 								// Suppression de l'image temporaire
 								unlink($filename);
 
-								$movie->update_poster($name, $m);
+								$movie->update_poster($name);
 							}
 						}
 		        }
-				HTTP::redirect('movies/view/'.$m->id);
+				HTTP::redirect('movie/view/'.$movie->id);
 			}
 
 			$errors = $validation->errors('user');
