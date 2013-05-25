@@ -2,9 +2,11 @@
 
 class Model_Movie extends ORM {
 
-	public static function get_movies()
+	public static function get_show_movies()
 	{
-		return ORM::factory('movie')->find_all();
+		return ORM::factory('movie')
+			->where('hide','=','0')
+			->find_all();
 	}
 
 	public static function get_movie($id)
@@ -14,18 +16,17 @@ class Model_Movie extends ORM {
 
 	public static function add_movie($post)
 	{
-		$movie = ORM::factory('movie');
-		$movie->title 		= 	$post['title'];
-		$movie->release 	= 	$post['release'];
-		$movie->synopsis 	= 	$post['synopsis'];
-		$movie->save();
-		return $movie;
+		$this->title 		= 	$post['title'];
+		$this->release 		= 	$post['release'];
+		$this->synopsis 	= 	$post['synopsis'];
+		$this->hide 		=	0; 
+		$this->save();
 	}
 
 	public static function update_poster($name, $movie)
 	{
-		$movie->poster = $name;
-		$movie->save();
+		$this->poster = $name;
+		$this->save();
 	}
 
 	public function display_poster()
@@ -38,5 +39,11 @@ class Model_Movie extends ORM {
 	{
 		if($this->poster != "")
 			return HTML::image('upload/movies/posters/'.$this->poster, array('width' => '203', 'height' => '300'));
+	}
+
+	public function hide()
+	{
+		$this->hide = 1;
+		$this->save();
 	}
 }

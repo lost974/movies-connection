@@ -4,7 +4,7 @@ class Controller_Page extends Controller_Template {
 
     public function action_home()
     {
-        $this->template->content = 'Still home';
+        $this->template->content = View::factory('pages/index');
     }
 
 }

@@ -4,7 +4,7 @@ class Controller_Movie extends Controller_Template {
 
 	public function action_index()
 	{
-		$movies = Model_Movie::get_movies();
+		$movies = Model_Movie::get_show_movies();
 		$this->template->content = View::factory('movies/index')
 			->set('movies',$movies);
 	}
@@ -23,9 +23,7 @@ class Controller_Movie extends Controller_Template {
 
 		if($_POST)
 		{
-			$post = Validation::factory($_POST);
-
-			$post = $post
+			$post = Validation::factory($_POST)
 				->rule('title','not_empty')
 				->rule('title', 'max_length', array(':value',100))
 				->rule('release', 'not_empty')
@@ -33,7 +31,7 @@ class Controller_Movie extends Controller_Template {
 
 			if($post->check())
 			{
-				$m = Model_Movie::add_movie($_POST);
+				$movie->add_movie($_POST);
 				if (true)
 		        {
 		            $file = Validation::factory($_FILES)
@@ -61,7 +59,7 @@ class Controller_Movie extends Controller_Template {
 								// Suppression de l'image temporaire
 								unlink($filename);
 
-								$m->update_poster($name, $m);
+								$movie->update_poster($name, $m);
 							}
 						}
 		        }
@@ -85,6 +83,14 @@ class Controller_Movie extends Controller_Template {
 		$id = $this->request->param('id');
 		$movie = Model_Movie::get_movie($id);
 		$movie->delete();
+		HTTP::redirect('movie/index');
+	}
+
+	public function action_hide()
+	{
+		$id = $this->request->param('id');
+		$movie = Model_Movie::get_movie($id);
+		$movie->hide();
 		HTTP::redirect('movie/index');
 	}
 }
